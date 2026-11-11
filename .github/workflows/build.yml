@@ -9,22 +9,22 @@ on:
 
 jobs:
   build:
-    # Use a Windows runner since this is a .NET desktop application
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup MSBuild and .NET Framework
-      uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-    - name: Build Application
-      run: msbuild "Notedsite/legacy-place-converter/Roblox Legacy Place Convertor.sln" /t:Rebuild /p:Configuration=Release
+      - name: Build Application
+        run: msbuild "Roblox Legacy Place Convertor.sln" /t:Rebuild /p:Configuration=Release
 
-    - name: Upload Compiled Executable
-      uses: actions/upload-artifact@v4
-      with:
-        name: Legacy-Place-Convertor-EXE
-        path: |
-          **\bin\Release\*.exe
-          **\bin\Release\*.dll
+      - name: Upload Compiled Executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: Legacy-Place-Convertor-EXE
+          path: |
+            **\bin\Release\*.exe
+            **\bin\Release\*.dll
